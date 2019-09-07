@@ -90,3 +90,56 @@ Odnawialny bit NOT NULL,
 )
 GO
 
+
+Pozostałe tabele   T-SQL:
+
+dbo.ProduktyFinansowe
+
+USE MojeFinanse
+Go
+CREATE TABLE ProduktyFinansowe
+(
+IDProduktu int NOT NULL,
+NazwaProduktu nvarchar(50) NOT NULL,
+)
+GO
+
+dbo.Akcje
+
+USE MojeFinanse
+Go
+CREATE TABLE Akcje
+(
+IDAkcji int IDENTITY(1,1) NOT NULL,
+Opis varchar(50) NOT NULL,
+SymbolAkcji varchar(50) NULL,
+BiezacaCena numeric(18,5) NOT NULL,
+)
+GO
+
+dbo.CenyAkcji
+
+USE MojeFinanse
+Go
+CREATE TABLE CenyAkcji
+(
+IDCenyAkcji bigint IDENTITY(1,1) NOT NULL,
+IDAkcji int NOT NULL,
+Cena numeric(18,5) NOT NULL,
+Data datetime NOT NULL
+)
+GO
+
+dbo.TypyTransakcji
+
+USE MojeFinanse
+Go
+CREATE TABLE TypyTransakcji
+(
+IDTypuTransakcji smallint NOT NULL,
+OpisTransakcji varchar(50) NOT NULL,
+TypKredytu bit NOT NULL,
+ZmianaStanuKonta bit NOT NULL
+)
+GO
+
