@@ -53,3 +53,40 @@ OperacjeNieZaksiegowane	money	Unchecked
 DataOtwarcia	date	Unchecked
 DataZamkniecia	date	Checked
 
+
+Tworzenie tabeli dbo.Transakcje  T-SQL:
+
+USE MojeFinanse
+Go
+CREATE TABLE Transakcje
+(
+IDTransakcji int IDENTITY(1,1) NOT NULL,
+IDKlienta int NOT NULL,
+TypTranskcji smallint NOT NULL,
+DataUtworzenia datetime NOT NULL,
+Kwota numeric(18,5) NOT NULL,
+Szczegoly nvarchar(50) NULL,
+Uwagi NVARCHAR(50) NULL,
+IDAkcji int NULL,
+IDProduktu int NOT NULL
+)
+GO
+
+
+Tworzenie tabeli dbo.ProduktyKlientow   T-SQL:
+
+USE MojeFinanse
+Go
+CREATE TABLE ProduktyKlientow
+(
+IDProduktuKlienta int NOT NULL,
+IDKlienta int NOT NULL,
+IDProduktuFinansowego int NOT NULL,
+Kwota money NOT NULL,
+Czestotliwosc smallint NOT NULL,
+OstatniaWplata datetime NOT NULL,
+OstatniaNaleznosc datetime NOT NULL,
+Odnawialny bit NOT NULL,
+)
+GO
+
