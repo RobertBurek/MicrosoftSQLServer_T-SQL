@@ -12,6 +12,30 @@ LOG ON ( NAME = N'MojaBaza_log', FILENAME = N'D:\Program Files\Microsoft SQL Ser
 SIZE = 1024KB, MAXSIZE = 2048GB, FILEGROWTH = 10% )
 GO
 
+zmienne:
 
+char(10) - dziesięć znaków, stałe, bez unicodu i zawsze 'AAA       '
+varchar(50) - wszystkie znaki 50 i tylko zapisane 'AAA'
+nchar(10)
+text -  > 8000 znaków -> varchar(8000)
+image -> text -binarny - varbinary()
+int - naturalne
+bigint - duże liczby
+smallint - małe liczby
+tinyint - malutkie
+decimal(18,0) - max 38 znaków,
+float - mało precyzyjny
+real - jw
+money - liczba 4 miejsca po przecinku, bez symbolu waluty
+date - od 1.1.1 do 31.12.9999
+datetime - 12:33:45 +data
+datetime2(7)
+smalldatetime inny zakres daty
+binary(50) - flagi binarny
+varbinary(50) > 8000znaków + obrazy
+xml - dane xml
+cursor - dane w pamięci kolumny i wiersze
+table - cursor i tabela
+sql_variant - bez określania wartości
 
 
