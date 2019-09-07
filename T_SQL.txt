@@ -143,3 +143,30 @@ ZmianaStanuKonta bit NOT NULL
 )
 GO
 
+Definiowanie kluczy podstawowych
+Set Primary Key
+
+ALTER TABLE Akcje 
+ADD PRIMARY KEY (IDAkcji)
+GO
+
+ALTER TABLE CenyAkcji 
+ADD PRIMARY KEY (IDCenyAkcji)
+GO
+
+ALTER TABLE TypyTransakcji 
+ADD PRIMARY KEY (IDTypuTransakcji)
+GO
+
+ALTER TABLE Transakcje 
+ADD PRIMARY KEY (IDTransakcji)
+GO
+
+ALTER TABLE ProduktyFinansowe 
+ADD PRIMARY KEY (IDProduktu)
+GO
+
+ALTER TABLE ProduktyKlienta 
+ADD PRIMARY KEY (IDProduktuKlienta)
+GO
+
