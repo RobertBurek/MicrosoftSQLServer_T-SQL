@@ -1,4 +1,17 @@
 Instalacja Microsoft SQL Server 2017
 Management Studio
 
+T-SQL - Tworzenie bazy danych:
+
+CREATE DATABASE MojeFinanse
+CONTAINMENT = NONE
+ON PRIMARY
+( NAME = N'MojaBaza', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL12.MYSQLEXPRESS\MSSQL\DATA\MojeFinanse.mdf',
+SIZE = 5120KB, MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+LOG ON ( NAME = N'MojaBaza_log', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL12.MYSQLEXPRESS\MSSQL\DATA\MojeFinanse.ldf',
+SIZE = 1024KB, MAXSIZE = 2048GB, FILEGROWTH = 10% )
+GO
+
+
+
 
