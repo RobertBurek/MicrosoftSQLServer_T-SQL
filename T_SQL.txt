@@ -170,3 +170,41 @@ ALTER TABLE ProduktyKlienta
 ADD PRIMARY KEY (IDProduktuKlienta)
 GO
 
+
+Tworzenie relacji między tabelami:
+Selected Relationship
+name: KO_Klienci_Transakcje
+Tables And Columns Speci ...
+dbo.Klienci.IDKlienta=dbo.Transakcje.IDKlienta
+Enforce For Replication YES
+
+ALTER TABLE ProduktyKlienta
+ADD CONSTRAINT FK_ProduktyFinansowe_ProduktyKlienta
+FOREIGN KEY (IDProduktuFinansowego)
+REFERENCES ProduktyFinansowe(IDProduktu)
+GO
+
+ALTER TABLE ProduktyKlienta
+ADD CONSTRAINT FK_Klienci_ProduktyKlienta
+FOREIGN KEY (IDKlienta)
+REFERENCES Klienci(IDKlienta)
+GO
+
+ALTER TABLE CenyAkcji
+ADD CONSTRAINT FK_Akcje_CenyAkcji
+FOREIGN KEY (IDAkcji)
+REFERENCES Akcje(IDAkcji)
+GO
+
+ALTER TABLE Transakcje
+ADD CONSTRAINT FK_Akcje_Transakcje
+FOREIGN KEY (IDAkcji)
+REFERENCES Akcje(IDAkcji)
+GO
+
+ALTER TABLE Transakcje
+ADD CONSTRAINT FK_ProduktyFinansowe_Transakcje
+FOREIGN KEY (IDProduktu)
+REFERENCES ProduktyFinansowe(IDProduktu)
+GO
+
