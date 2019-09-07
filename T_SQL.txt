@@ -208,3 +208,63 @@ FOREIGN KEY (IDProduktu)
 REFERENCES ProduktyFinansowe(IDProduktu)
 GO
 
+Indeksy
+
+Indeks klastrowany
+Indeks nieklastrowany
+Indeks podstawowych
+Indeks wtórny XML
+
+indeks unikatowy i nieunikatowy
+
+cechy dobrego indeksu:
+max 16 kolumn i 900 bajtów danych w kolumnie
+- kolumny rzadko zmieniane,
+- indeks klastrowany na kluczu
+- wyszuliwanie rekordów danych 
+- indeks pokrywający (np. całą tabelę)
+- przeszukuwanie zakresu danych
+- uporządkowanie danych
+
+cechy złego indeksu:
+- wybór nieodpowiednich kolumn
+- wybór nieodpowiednich danych 
+- wybór zbyt wielu kolumn
+- zbyt mało rekordów w tabeli
+
+do monitorowania indeksów
+DATABASE INGINE TUNING ADVAISON
+
+Tworzenie indeksu klastrowego  T-SQL:
+
+USE MojeFinanse
+GO
+CREATE UNIQUE CLUSTERED INDEX IX_TypyTransakcji
+ON TypyTransakcji(IDTypuTransakcji ASC)
+WITH
+(
+STATISTICS_NORECOMPUTE = ON,
+SORT_IN_TEMPDB = ON,
+DROP_EXISTING = OFF,
+IGNORE_DUP_KEY = ON,
+ALLOW_ROW_LOCKS = ON,
+ALLOW_PAGE_LOCKS = ON
+)
+GO
+
+Tworzenie indeksu nieklastrowego  T-SQL:
+
+USE MojeFinanse
+GO
+CREATE NONCLUSTERED INDEX IX_TypyTransakcji_NC
+ON Transakcje(TypTransakcji ASC)
+WITH
+(
+STATISTICS_NORECOMPUTE = OFF,
+SORT_IN_TEMPDB = ON,
+DROP_EXISTING = OFF,
+IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON,
+ALLOW_PAGE_LOCKS = ON
+)
+GO
