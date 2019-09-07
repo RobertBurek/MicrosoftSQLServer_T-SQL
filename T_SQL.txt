@@ -1,0 +1,4 @@
+Instalacja Microsoft SQL Server 2017
+Management Studio
+
+
