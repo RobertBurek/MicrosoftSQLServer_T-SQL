@@ -39,3 +39,17 @@ table - cursor i tabela
 sql_variant - bez określania wartości
 
 
+Tworzenie tabeli dbo.Klienci w środowisku:
+
+IDKlienta	int	Unchecked
+IDTytuluKlienta	int	Checked
+IDAdresu	int	Unchecked
+Imie	varchar(50)	Unchecked
+Nazwisko	varchar(50)	Unchecked
+Inicjaly	varchar(10)	Checked
+TypKonta	tinyint	Unchecked
+OperacjeZaksiegowane	money	Unchecked
+OperacjeNieZaksiegowane	money	Unchecked
+DataOtwarcia	date	Unchecked
+DataZamkniecia	date	Checked
+
