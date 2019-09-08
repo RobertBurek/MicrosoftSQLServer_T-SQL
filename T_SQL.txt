@@ -309,4 +309,15 @@ ALLOW_PAGE_LOCKS = ON
 GO
 
 
+Tworzenie diagramu bazy danych
+
+ustawienie uzytkownika:
+
+USE MojeFinanse
+Go
+ALTER AUTHORIZATION ON DATABASE :: MojeFinanse TO "sa"
+
+Database Diagrams/New Database Diagram
+
+
 
