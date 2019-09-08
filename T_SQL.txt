@@ -411,3 +411,31 @@ USE master
 GO
 sp_detach_db 'MojeFinanse'
 
+
+Dodanie danych do tabel:
+
+USE MojeFinanse
+GO
+INSERT INTO [Akcje]
+(Opis,SymbolAkcji,BiezacaCena)
+VALUES ('To jest moja fajna akcja', 'AK', 34.25)
+
+wyświetlenie zawartości tabeli:
+
+SELECT [IDAkcji]
+      ,[Opis]
+      ,[SymbolAkcji]
+      ,[BiezacaCena]
+  FROM [MojeFinanse].[dbo].[Akcje]
+
+dane do tabeli dbo.Klienci:
+
+USE MojeFinanse
+GO
+INSERT INTO [Klienci] (IDTytuluKlienta,IDAdresu,Imie,Nazwisko,Inicjaly,TypKonta,
+OperacjeZaksiegowane,OperacjeNieZaksiegowane,DataOtwarcia,DataZamkniecia)
+VALUES (1,1,'Robert','Nowak','RN',3,42.12,12.34,'2016-03-02','2018-05-23'),
+(2,2,'Tomasz','Gawron','TG',2,56.12,46.24,'2018-02-03','2019-02-01'),
+(1,3,'Maria','Kowalska','MK',4,24.56,56.34,'2016-05-23','2019-03-23')
+
+SELECT *  FROM [MojeFinanse].[dbo].[Klienci]
