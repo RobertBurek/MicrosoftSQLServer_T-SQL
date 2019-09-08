@@ -386,3 +386,28 @@ USE [master]
 RESTORE DATABASE [MojeFinanse] FROM  DISK = N'D:\MicrosoftSQLServerKurs\BackUpDATABASE\MojeFinanseKopia1' WITH  FILE = 1,  NOUNLOAD,  REPLACE,  STATS = 5
 
 GO
+
+
+Dołączenie i odłącznie bazy
+
+odłączenie bazy
+MojeFinanse/Task/Detach
+Drop Connections
+
+USE master
+GO
+CREATE DATABASE MojeFinanse
+ON (
+FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL12.MYSQLEXPRESS\MSSQL\DATA\MojeFinanse.mdf'
+)
+FOR ATTACH
+ALTER DATABASE MojeFinanse
+SET MULTI_USER
+
+dołączenie bazy
+Database/Attach
+
+USE master
+GO
+sp_detach_db 'MojeFinanse'
+
