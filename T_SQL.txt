@@ -268,3 +268,45 @@ ALLOW_ROW_LOCKS = ON,
 ALLOW_PAGE_LOCKS = ON
 )
 GO
+
+Usunięcie indeksu w Management Studio
+w tabeli dbo.Transakcje
+
+utworzenie nowego indeksu na tej tabeli:
+
+USE MojeFinanse
+GO
+CREATE UNIQUE CLUSTERED INDEX IX_KlienciDataTransakcji
+ON Transakcje (IDKlienta ASC,DataUtworzenia ASC)
+WITH
+(
+STATISTICS_NORECOMPUTE = ON,
+SORT_IN_TEMPDB = ON,
+DROP_EXISTING = OFF,
+IGNORE_DUP_KEY = ON,
+ALLOW_ROW_LOCKS = ON,
+ALLOW_PAGE_LOCKS = ON
+)
+GO
+
+Modyfikacja indeksu polega na usunięciu
+i dodaniu nowego indeksu
+DROP_EXISTING = ON,
+
+USE MojeFinanse
+GO
+CREATE UNIQUE CLUSTERED INDEX IX_KlienciDataTransakcji
+ON Transakcje (IDKlienta ASC,DataUtworzenia DESC)
+WITH
+(
+STATISTICS_NORECOMPUTE = ON,
+SORT_IN_TEMPDB = ON,
+DROP_EXISTING = ON,
+IGNORE_DUP_KEY = ON,
+ALLOW_ROW_LOCKS = ON,
+ALLOW_PAGE_LOCKS = ON
+)
+GO
+
+
+
