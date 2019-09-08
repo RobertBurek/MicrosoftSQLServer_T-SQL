@@ -354,3 +354,35 @@ MEMORY_OPTIMIZED = ON,
 DURABILITY = SCHEMA_AND_DATA,
 )
 
+
+Tworzenie kopii zapasowej
+- model pełny
+- model wsadowy
+- model uproszczony
+
+- kopia różnicowa (przyrostowa)
+- kopia pełna dziennika
+
+Dziennik transakcji
+zawiera pojedynczą zmianę w bazie.
+
+Dobre praktyki:
+- kopia bazy master
+- kopia bazy msdb
+
+Odzyskiwanie danych z kopii
+
+przykładowo dodajemy kolumnę do tabeli dbo.Akcje
+
+USE MojeFinanse
+GO
+ALTER TABLE Akcje
+ADD KolumnaTestowa VARCHAR(50) NULL
+GO
+
+MojeFinanse/Task/Restor/Database
+
+USE [master]
+RESTORE DATABASE [MojeFinanse] FROM  DISK = N'D:\MicrosoftSQLServerKurs\BackUpDATABASE\MojeFinanseKopia1' WITH  FILE = 1,  NOUNLOAD,  REPLACE,  STATS = 5
+
+GO
