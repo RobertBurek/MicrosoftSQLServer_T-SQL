@@ -320,4 +320,37 @@ ALTER AUTHORIZATION ON DATABASE :: MojeFinanse TO "sa"
 Database Diagrams/New Database Diagram
 
 
+Tworzenie bazy i tabel w pamięci  T-SQL
+SQL SERVER wersji developer lub enterprise
+
+Tworzenie bazy w pamięci:
+
+USE MojeFinanse
+GO
+ALTER DATABASE MojeFinanse
+ADD FILEGROUP [IN-MEMORY-PRIMARY]
+CONTAINS MEMORY_OPTIMIZED_DATA
+
+ALTER DATABASE MojeFinanse
+ADD FILE
+(
+NAME='MojeFinanse-Pamiec',
+FILENAME='D:\Program Files\Microsoft SQL Server\MSSQL12.MYSQLEXPRESS\MSSQL\DATA\MojeFinanse-Pamiec',
+)
+TO FILEGROUP [IN-MEMORY-PRIMARY]
+
+Tworzenie tabeli w pamięci:
+
+CREATE TABLE BiezaceCenyAkcji(
+IdentyfikatorAkcji VARCHAR(50)
+COLLATE Latin1_General_100_BIN2 NOT NULL
+PRIMARY KEY NONCLUSTERED HASH
+WITH (BUCKET_COUNT = 20000),
+BiezacaCena NUMERIC(18,5) NOT NULL,
+Czas SMALLDATETIME NOT NULL
+)
+WITH (
+MEMORY_OPTIMIZED = ON,
+DURABILITY = SCHEMA_AND_DATA,
+)
 
