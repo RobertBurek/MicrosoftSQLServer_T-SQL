@@ -478,3 +478,49 @@ BEGIN TRAN  z  COMMIT TRAN
 BEGIN TRAN  z  ROLBANK TRAN
 inaczej zablokujemy tabelę.
 
+
+Odzcytywanie danych z tabeli  T-SQL:
+
+SELECT TOP 10 [IDKlienta]
+      ,[IDTytuluKlienta]
+      ,[IDAdresu]
+      ,[Imie]
+      ,[Nazwisko]
+      ,[Inicjaly]
+      ,[TypKonta]
+      ,[OperacjeZaksiegowane]
+      ,[OperacjeNieZaksiegowane]
+      ,[DataOtwarcia]
+      ,[DataZamkniecia]
+  FROM [MojeFinanse].[dbo].[Klienci]
+
+SELECT * FROM [MojeFinanse].[dbo].[Klienci]
+WHERE IDKlienta>2
+
+USE MojeFinanse
+GO
+SELECT Imie, Nazwisko FROM [Klienci]
+
+SELECT Imie AS 'Imie klienta', Nazwisko AS 'Nazwisko klienta' FROM [Klienci]
+
+USE MojeFinanse
+GO
+SELECT [Imie],[Nazwisko] FROM [Klienci]
+WHERE Imie='Maria'
+
+SELECT [Imie],[Nazwisko] FROM [Klienci]
+WHERE Imie='Maria' OR IDKlienta=4
+
+USE MojeFinanse
+GO
+SELECT [IDKlienta],[Nazwisko],Inicjaly,TypKonta FROM [Klienci]
+WHERE Nazwisko='Kowalska' OR IDKlienta=5 OR Inicjaly='MK'
+
+USE MojeFinanse
+GO
+SELECT [Nazwisko] AS 'Imie klienta',Nazwisko AS 'Nazwisko klienta',TypKonta FROM [Klienci]
+WHERE 'Nazwisko klienta'='Kowalska' OR IDKlienta=5 OR Inicjaly='MK'
+
+SELECT TOP 2 [Nazwisko] AS 'Imie klienta',Nazwisko AS 'Nazwisko klienta',TypKonta FROM [Klienci]
+WHERE 'Nazwisko klienta'='Kowalska' OR IDKlienta=5 OR Inicjaly='MK'
+
