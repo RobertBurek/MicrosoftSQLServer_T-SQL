@@ -699,3 +699,47 @@ AS
 SELECT k.Imie 'Imie klienta',k.Nazwisko 'Nazwisko klienta', t.Kwota 
 FROM Klienci k INNER JOIN Transakcje t
 ON t.IDKlienta=k.IDKlienta
+
+
+Indeksowanie widoków:
+
+USE MojeFinanse
+GO
+CREATE VIEW wk_KlienciIndeks WITH SCHEMABINDING
+AS SELECT Imie 'Imie klienta',Nazwisko 'Nazwisko klienta' 
+FROM dbo.Klienci
+
+cały skrypy indeks klastrowany (unikatowy):
+
+USE MojeFinanse
+GO
+DROP VIEW wk_KlienciIndeks
+GO
+CREATE VIEW wk_KlienciIndeks WITH SCHEMABINDING
+AS SELECT IDKlienta 'ID klienta', Imie 'Imie klienta', Nazwisko 'Nazwisko klienta' 
+FROM dbo.Klienci
+GO
+CREATE UNIQUE CLUSTERED INDEX ucidx_klient_id
+ON wk_KlienciIndeks([ID Klienta])
+
+indeks nieklastrowany (może ich być więcej)
+CREATE NONCLUSTERED INDEX ucidx_klient_imie
+ON wk_KlienciIndeks([Imie klienta])
+
+CREATE NONCLUSTERED INDEX ucidx_klient_nazwisko
+ON wk_KlienciIndeks([Nazwisko klienta])
+
+widok bea AS:
+USE MojeFinanse
+GO
+CREATE VIEW wk_KlienciIndeksBezAS WITH SCHEMABINDING
+AS SELECT IDKlienta,Imie,Nazwisko 
+FROM dbo.Klienci
+
+indeks:
+CREATE UNIQUE CLUSTERED INDEX ucidx_klient_id
+ON wk_KlienciIndeksBezAS(IDKlienta)
+
+CREATE NONCLUSTERED INDEX ucidx_klient_imie
+ON wk_KlienciIndeksBezAS(Imie)
+
