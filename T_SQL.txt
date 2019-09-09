@@ -556,3 +556,110 @@ SET Imie='Norbert' WHERE IDKlienta=5
 UPDATE Klienci 
 SET Nazwisko='Murowski' WHERE Imie='Norbert'
 
+
+Odczyt danych z kilku tabel  T-SQL:
+- INNER JOIN (wspolne części)
+- AUTHOR JOIN (LEFT, RIGHT)
+- CROS JOIN (każdy wiersz z innym wierszem)
+
+Uzupełninie tabel danymi:
+dbo.Klienci:
+INSERT INTO Klienci(IDTytuluKlienta,IDAdresu,Imie,Nazwisko,Inicjaly,TypKonta,OperacjeZaksiegowane,OperacjeNiezaksiegowane,DataOtwarcia,DataZamkniecia)
+VALUES (1,1,'Janek','Kowalski','JK',3,45.12,12.34,'2016-03-02','2018-05-23'),
+(2,2,'Krzysiek','Gawron','KG',2,56.12,46.24,'2018-02-03','2019-02-01'),
+(1,3,'Tomek','Kowalski','TK',4,24.56,56.34,'2016-05-23','2019-03-23'),
+(1,3,'Misiek','Kowalski','MK',4,24.56,56.34,'2016-05-23','2019-03-23')
+
+dbo.Akcje:
+INSERT INTO Akcje(Opis,SymbolAkcji,BiezacaCena)
+VALUES ('opis1','AK1',34.65),
+('opis2','AK2',32.65),
+('opis3','AK3',33.65),
+('opis4','AK4',35.65),
+('opis5','AK5',36.65),
+('opis6','AK6',37.65),
+('opis7','AK7',343.65),
+('opis8','AK8',334.65),
+('opis9','AK9',34.65),
+('opis10','AK19',34.65),
+('opis1','AK1',34.65)
+
+dbo.ProduktyFinansowe:
+INSERT INTO ProduktyFinansowe(IDProduktu,NazwaProduktu) VALUES
+(1,'Usluga finansowa'),
+(2,'Usluga finansowa 2'),
+(3,'Usluga finansowa 3'),
+(4,'Usluga finansowa 4'),
+(5,'Usluga finansowa 5'),
+(6,'Usluga finansowa 6'),
+(7,'Usluga finansowa 7'),
+(8,'Usluga finansowa 8'),
+(9,'Usluga finansowa 9'),
+(10,'Usluga finansowa 10'),
+(11,'Usluga finansowa 11'),
+(12,'Usluga finansowa 12'),
+(13,'Usluga finansowa 13')
+
+dbo.CenyAkcji:
+INSERT INTO CenyAkcji(IDAkcji,Cena,Data)
+VALUES (1,34.43,'2015-03-04'),
+(1,34.43,'2015-03-04'),
+(1,35.43,'2015-03-04'),
+(1,36.43,'2015-03-04'),
+(1,37.43,'2015-003-04'),
+(2,38.43,'2016-03-04'),
+(2,37.43,'2016-03-04'),
+(2,36.43,'2016-03-04'),
+(2,35.43,'2016-03-04'),
+(2,32.43,'2016-03-04'),
+(3,33.43,'2017-03-04'),
+(3,34.43,'2017-03-04'),
+(3,33.43,'2017-03-04'),
+(3,34.43,'2017-03-04'),
+(3,33.43,'2017-03-04'),
+(3,34.43,'2017-03-04')
+
+dbo.Transakcje:
+INSERT INTO Transakcje(IDKlienta,TypTransakcji,DataUtworzenia,Kwota,Szczegoly,Uwagi,IDAkcji,IDProduktu) 
+VALUES (4,1,'2015-03-05',24.56,'To byla udana transakcja','Wszystko ok. Obsluga bardzo mila',1,1),
+(4,2,'2017-02-12',43.54,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',2,3),
+(4,3,'2016-03-04',65.23,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',3,4),
+(5,2,'2017-04-04',45.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',4,5),
+(5,2,'2018-05-02',47.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',5,6),
+(5,2,'2017-05-02',57.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',6,7),
+(6,3,'2019-05-02',44.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',7,7),
+(6,5,'2012-05-02',45.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',7,8),
+(6,2,'2015-05-02',47.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',8,9),
+(7,2,'2015-07-02',48.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',9,10),
+(7,2,'2016-05-02',49.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',10,11),
+(7,4,'2017-07-02',49.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',11,12),
+(7,2,'2016-05-02',49.98,'To byla udana transakcja','Wszystko ok.Obsluga bardzo mila',12,13)
+
+USE MojeFinanse
+GO
+SELECT k.Imie, K.Nazwisko, t.IDKlienta FROM Klienci AS k
+INNER JOIN Transakcje AS t 
+ON t.IDKlienta=k.IDKlienta
+
+SELECT k.Imie AS 'Imie klienta', k.Nazwisko AS 'Nazwisko klienta',k.Inicjaly AS 'Inicjały klienta',
+t.Kwota AS 'Kwota transakcji' FROM Klienci AS k
+INNER JOIN Transakcje AS t 
+ON t.IDKlienta=k.IDKlienta
+
+AS - nie jest konieczne w zapisie:
+
+SELECT k.Imie 'Imie klienta', k.Nazwisko 'Nazwisko klienta',k.Inicjaly 'Inicjały klienta',
+t.Kwota 'Kwota transakcji' FROM Klienci k
+INNER JOIN Transakcje t 
+ON t.IDKlienta=k.IDKlienta
+
+SELECT k.Imie 'Imie klienta', k.Nazwisko 'Nazwisko klienta',t.Kwota 'Kwota transakcji' FROM Klienci k
+LEFT JOIN Transakcje t 
+ON k.IDKlienta=t.IDKlienta
+
+SELECT k.Imie 'Imie klienta', k.Nazwisko 'Nazwisko klienta',t.Kwota 'Kwota transakcji',
+Inicjaly, t.Szczegoly 'Szczegóły transakcji' FROM Klienci k
+LEFT JOIN Transakcje t ON k.IDKlienta=t.IDKlienta
+
+SELECT k.Nazwisko, k.IDAdresu,k.TypKonta,t.TypTransakcji,t.Szczegoly 'Szczegóły transakcji' 
+FROM Klienci k RIGHT JOIN Transakcje t ON k.IDKlienta=t.IDKlienta
