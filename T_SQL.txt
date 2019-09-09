@@ -663,3 +663,39 @@ LEFT JOIN Transakcje t ON k.IDKlienta=t.IDKlienta
 
 SELECT k.Nazwisko, k.IDAdresu,k.TypKonta,t.TypTransakcji,t.Szczegoly 'Szczegóły transakcji' 
 FROM Klienci k RIGHT JOIN Transakcje t ON k.IDKlienta=t.IDKlienta
+
+
+WIDOKI 
+wirtualna tabela, łączenia wielu tabel,
+ochrona reszty danych, możliwość szyfrowania
+
+w środowisku:
+SELECT TOP (100) PERCENT IDAkcji AS [ID Akcji], Opis AS [Opis Akcji], SymbolAkcji AS [Symbol Akcji], BiezacaCena AS [Bieżąca Cena]
+FROM     dbo.Akcje
+WHERE  (BiezacaCena > 1)
+ORDER BY [Symbol Akcji]
+
+T-SQL:
+USE MojeFinanse
+GO
+CREATE VIEW wk_KlienciImieNazwisko
+AS 
+SELECT Imie,Nazwisko FROM Klienci
+
+USE MojeFinanse
+GO
+CREATE VIEW wk_KlienciINI
+AS 
+SELECT Imie 'Imie klienta',Nazwisko 'Nazwisko klienta', Inicjaly FROM Klienci
+
+CREATE VIEW wk_AkcjeIO
+AS 
+SELECT IDAkcji, Opis 'Opis akcji' FROM Akcje
+
+USE MojeFinanse
+GO
+CREATE VIEW wk_KlienciTransakcje
+AS 
+SELECT k.Imie 'Imie klienta',k.Nazwisko 'Nazwisko klienta', t.Kwota 
+FROM Klienci k INNER JOIN Transakcje t
+ON t.IDKlienta=k.IDKlienta
