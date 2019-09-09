@@ -524,3 +524,35 @@ WHERE 'Nazwisko klienta'='Kowalska' OR IDKlienta=5 OR Inicjaly='MK'
 SELECT TOP 2 [Nazwisko] AS 'Imie klienta',Nazwisko AS 'Nazwisko klienta',TypKonta FROM [Klienci]
 WHERE 'Nazwisko klienta'='Kowalska' OR IDKlienta=5 OR Inicjaly='MK'
 
+
+Tworzenie i modyfikacja danych  T-SQL
+
+tabela tymczasowa:
+
+USE MojeFinanse
+GO
+SELECT [Nazwisko] AS 'Imie klienta',Nazwisko AS 'Nazwisko klienta' INTO KlienciTemp1
+FROM [Klienci]
+
+SELECT IDTytuluKlienta, Imie AS 'Imie klienta',Nazwisko AS 'Nazwisko klienta',Inicjaly
+INTO KlienciTemp2 FROM [Klienci]
+
+SELECT IDTytuluKlienta, [Imie klienta],[Nazwisko klienta],Inicjaly
+FROM KlienciTemp2
+
+SELECT Imie + ' '+Nazwisko AS Klient,Inicjaly
+INTO KlienciTemp3 FROM Klienci
+
+SELECT TOP 10 [Klient],[Inicjaly]
+FROM [MojeFinanse].[dbo].[KlienciTemp3]
+
+Modyfikacja danych:
+
+USE MojeFinanse
+GO
+UPDATE Klienci 
+SET Imie='Norbert' WHERE IDKlienta=5
+
+UPDATE Klienci 
+SET Nazwisko='Murowski' WHERE Imie='Norbert'
+
